@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "baseUrl": ".",
+    "paths": {
+      "@store/*": ["src/store/*"],
+
+      "@pages/*": ["src/pages/*"],
+
+      "@styles/*": ["src/styles/*"],
+
+      "@c-atoms/*": ["src/components/atoms/*"],
+      "@c-molecules/*": ["src/components/molecules/*"],
+      "@c-organisms/*": ["src/components/organisms/*"],
+      "@c-templates/*": ["src/components/templates/*"],
+    }
+  },
+  "include": ["src/vite-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
+}
