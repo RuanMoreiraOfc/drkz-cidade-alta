@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import Heading from '@c-atoms/Heading';
+import Button from '@c-atoms/Button';
 
 export default connect()(Login);
 
@@ -31,18 +32,18 @@ function Login({ dispatch }: any) {
       <Page>
          <Heading>Aqui ficará um formulário</Heading>
          <Form onSubmit={handleSubmit}>
-            <Input //
+            <RequiredInput //
                name='username'
                placeholder='Usuário'
                required
             />
-            <Input
+            <RequiredInput
                name='password'
                type='password'
                placeholder='Senha'
                required
             />
-            <SubmitButton type='submit'>Entrar</SubmitButton>
+            <SubmitButton>Entrar</SubmitButton>
          </Form>
       </Page>
    );
@@ -61,7 +62,9 @@ const Form = styled.form`
    gap: 2.4rem;
 `;
 
-const Input = styled.input`
+const RequiredInput = styled.input.attrs((props) => ({
+   required: true,
+}))`
    padding: 0.8rem;
 
    border: none;
@@ -70,22 +73,10 @@ const Input = styled.input`
    font-size: 1.8rem;
 `;
 
-const SubmitButton = styled.button`
-   padding: 0.8rem;
-
-   border-radius: 0.4rem;
-   border: none;
-
-   color: var(--c-white);
-   background-color: var(--c-blue-900);
-
+const SubmitButton = styled(Button).attrs((props) => ({
+   type: 'submit',
+   textColor: 'var(--c-white)',
+   bgColor: 'var(--c-blue-900)',
+}))`
    font-size: 2.4rem;
-
-   &:hover {
-      filter: brightness(1.2);
-   }
-
-   &:active {
-      filter: brightness(1.4);
-   }
 `;
