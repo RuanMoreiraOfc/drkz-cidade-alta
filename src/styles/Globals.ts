@@ -9,6 +9,9 @@ const GlobalStyle = createGlobalStyle`
     --ff-heading: Roboto, sans-serif;
     --ff-body: Roboto, sans-serif;
 
+    --c-white: #FFF;
+    --c-black: #222;
+
     --c-blue-900: #1E3E5F;
     --c-blue-500: #3770AC;
     --c-blue-50: #C6E7F8;
