@@ -2,7 +2,10 @@ import { GlobalStyle } from '@styles/Globals';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider as ReduxProvider } from 'react-redux';
 import styled from 'styled-components';
+
+import store from '@store/index';
 
 import MyApp from '@pages/_app';
 
@@ -18,8 +21,10 @@ const Page = styled.div`
 ReactDOM.render(
    <React.StrictMode>
       <Page>
-         <GlobalStyle />
-         <MyApp />
+         <ReduxProvider store={store}>
+            <GlobalStyle />
+            <MyApp />
+         </ReduxProvider>
       </Page>
    </React.StrictMode>,
    document.getElementById('root'),
