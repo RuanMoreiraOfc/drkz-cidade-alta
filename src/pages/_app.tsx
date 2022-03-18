@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import Home from '@pages/index';
+import AuthMiddleware from '@pages/authMiddleware';
+import Login from '@pages/index';
 
 export default MyApp;
 
@@ -10,9 +11,9 @@ function MyApp({}: Props) {
    return (
       <BrowserRouter>
          <Routes>
-            <Route
-               path='/' //
-               element={<Home />}
+            <Route //
+               path='/'
+               element={<AuthMiddleware render={<Login />} />}
             />
          </Routes>
       </BrowserRouter>
