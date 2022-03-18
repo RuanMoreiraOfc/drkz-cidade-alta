@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
+import Heading from '@c-atoms/Heading';
+
 export default connect()(Login);
 
 type Props = {};
@@ -27,7 +29,7 @@ function Login({ dispatch }: any) {
 
    return (
       <Page>
-         <PageHeading>Aqui ficará um formulário</PageHeading>
+         <Heading>Aqui ficará um formulário</Heading>
          <Form onSubmit={handleSubmit}>
             <Input //
                name='username'
@@ -53,8 +55,6 @@ const Page = styled.div`
    display: grid;
    gap: 2.4rem;
 `;
-
-const PageHeading = styled.h1``;
 
 const Form = styled.form`
    display: grid;
