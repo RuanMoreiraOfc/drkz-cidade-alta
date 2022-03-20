@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
+import PageSection from '@c-atoms/PageSection';
 import Heading from '@c-atoms/Heading';
 import Button from '@c-atoms/Button';
 
@@ -49,12 +50,8 @@ function Login({ dispatch }: any) {
    );
 }
 
-const Page = styled.div`
+const Page = styled(PageSection)`
    max-width: 500px;
-   padding: 0 4rem;
-
-   display: grid;
-   gap: 2.4rem;
 `;
 
 const Form = styled.form`

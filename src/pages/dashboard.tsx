@@ -19,6 +19,7 @@ import sortByString from '@libs/sortByString';
 
 import api from '@services/api';
 
+import PageSection from '@c-atoms/PageSection';
 import Heading from '@c-atoms/Heading';
 import Button from '@c-atoms/Button';
 
@@ -353,12 +354,7 @@ function Dashboard({}: Props) {
    );
 }
 
-const Page = styled.div`
-   padding: 0 4rem;
-
-   display: grid;
-   gap: 2.4rem;
-`;
+const Page = styled(PageSection)``;
 
 const Form = styled.form`
    justify-content: center;
