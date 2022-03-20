@@ -16,6 +16,8 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
+      "@services/*": ["src/services/*"],
+
       "@store/*": ["src/store/*"],
 
       "@pages/*": ["src/pages/*"],
