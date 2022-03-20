@@ -19,11 +19,23 @@ function AuthMiddleware({ isAuthenticated, render }: Props) {
    const location = useLocation();
 
    if (isAuthenticated === true && location.pathname === '/') {
-      return <Navigate to={'/dashboard'} replace />;
+      const searchSplitted = location.search
+         .slice(1)
+         .replace(/&/g, '=')
+         .split('=');
+      const searchMap = searchSplitted.reduce(
+         (result, cur, i, originalArr) =>
+            (i + 1) / 2 === 0
+               ? { ...result, [originalArr[i + 1]]: cur }
+               : result,
+         {} as Record<'next_redirect', string>,
+      );
+
+      return <Navigate to={searchMap.next_redirect || '/dashboard'} replace />;
    }
 
    if (isAuthenticated === false && location.pathname !== '/') {
-      return <Navigate to={'/'} replace />;
+      return <Navigate to={`/?next_redirect=${location.pathname}`} replace />;
    }
 
    return render;

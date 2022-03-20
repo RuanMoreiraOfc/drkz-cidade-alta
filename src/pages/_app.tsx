@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import AuthMiddleware from '@pages/authMiddleware';
 import Login from '@pages/index';
@@ -19,6 +19,14 @@ function MyApp({}: Props) {
             <Route
                path='/dashboard'
                element={<AuthMiddleware render={<Dashboard />} />}
+            />
+            <Route
+               path='*'
+               element={
+                  <AuthMiddleware
+                     render={<Navigate to='/dashboard' replace />}
+                  />
+               }
             />
          </Routes>
       </BrowserRouter>
