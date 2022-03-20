@@ -4,7 +4,6 @@ import type {
    ChangeEventHandler,
    MouseEvent,
 } from 'react';
-import { Fragment } from 'react';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -17,6 +16,8 @@ import {
 import sortByString from '@libs/sortByString';
 
 import api from '@services/api';
+
+import { Fragment } from 'react';
 
 import PageSection from '@c-atoms/PageSection';
 import Heading from '@c-atoms/Heading';
