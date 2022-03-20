@@ -26,14 +26,18 @@ const GlobalStyle = createGlobalStyle`
     --c-gray-100: #D1D2DC;
     --c-gray-50: #EEEEF2;
 
-    font-size: 50%;
+    font-size: 37.5%; // 6px
+
+    @media (min-width: 425px) {
+      font-size: 56.25%; // 8px
+    }
 
     @media (min-width: 768px) {
-      font-size: 56.25%;
+      font-size: 56.25%; // 9px
     }
 
     @media (min-width: 1024px) {
-      font-size: 62.5%;
+      font-size: 62.5%; // 10px
     }
   }
 
