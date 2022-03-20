@@ -14,7 +14,6 @@ import {
    FaTrash as DeleteIcon,
 } from 'react-icons/fa';
 
-import sanitize from '@libs/inputSanitizer';
 import sortByString from '@libs/sortByString';
 
 import api from '@services/api';
@@ -35,14 +34,13 @@ type ApiData = {
 
 type ApiTreatedData = {
    id: number;
-   sanitizedName: string;
    name: string;
    date: string;
    penalty: string;
    status: string;
 };
 
-type ApiTreatedFields = Exclude<keyof ApiTreatedData, 'id' | 'sanitizedName'>;
+type ApiTreatedFields = Exclude<keyof ApiTreatedData, 'id'>;
 
 type Props = {};
 
@@ -95,7 +93,6 @@ function Dashboard({}: Props) {
                criminalCodeResponse.data.flatMap<ApiTreatedData>((item) => {
                   return {
                      id: item.id,
-                     sanitizedName: sanitize(item.nome, '-'),
                      name: item.nome,
                      date: new Date(item.dataCriacao).toLocaleDateString([
                         'pt-br',
@@ -336,11 +333,11 @@ function Dashboard({}: Props) {
                                  children={<DeleteIcon />}
                               />
                               <LinkButton
-                                 to={`./view/${data.sanitizedName}`}
+                                 to={`./view/${data.id}`}
                                  children={<ViewIcon />}
                               />
                               <LinkButton
-                                 to={`./edit/${data.sanitizedName}`}
+                                 to={`./edit/${data.id}`}
                                  children={<EditIcon />}
                               />
                            </TableDataActions>
