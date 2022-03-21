@@ -381,6 +381,10 @@ const Label = styled(Button).attrs({
    as: 'label',
 })`
    user-select: none;
+
+   &:focus-within {
+      outline-style: auto;
+   }
 `;
 
 const Checkbox = styled.input.attrs({
