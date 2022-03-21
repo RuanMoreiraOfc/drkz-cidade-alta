@@ -13,6 +13,7 @@ import {
    FaTrash as DeleteIcon,
 } from 'react-icons/fa';
 
+import parseCurrency from '@libs/parseCurrency';
 import sortByNumber from '@libs/sortByNumber';
 import sortByString from '@libs/sortByString';
 
@@ -100,11 +101,7 @@ function Dashboard({}: Props) {
                      'pt-br',
                   ]),
                   penalty: item.multa,
-                  penaltyAsString: Intl.NumberFormat(['pt-br'], {
-                     style: 'currency',
-                     currency: 'BRL',
-                     minimumFractionDigits: 2,
-                  }).format(item.multa),
+                  penaltyAsString: parseCurrency(['pt-br'], 'BRL')(item.multa),
                   status: statusResponse.data.find(
                      ({ id }) => id === item.status,
                   )!.descricao,
