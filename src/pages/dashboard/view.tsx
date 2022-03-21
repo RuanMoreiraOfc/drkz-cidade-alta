@@ -1,7 +1,6 @@
 import type { ReactNode } from 'react';
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-
 import styled from 'styled-components';
 
 import parseCurrency from '@libs/parseCurrency';
