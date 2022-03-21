@@ -13,6 +13,7 @@ import {
    FaTrash as DeleteIcon,
 } from 'react-icons/fa';
 
+import sortByNumber from '@libs/sortByNumber';
 import sortByString from '@libs/sortByString';
 
 import api from '@services/api';
@@ -37,11 +38,12 @@ type ApiTreatedData = {
    id: number;
    name: string;
    date: string;
-   penalty: string;
+   penalty: number;
+   penaltyAsString: string;
    status: string;
 };
 
-type ApiTreatedFields = Exclude<keyof ApiTreatedData, 'id'>;
+type ApiTreatedFields = Exclude<keyof ApiTreatedData, 'id' | 'penaltyAsString'>;
 
 type Props = {};
 
@@ -98,7 +100,8 @@ function Dashboard({}: Props) {
                      date: new Date(item.dataCriacao).toLocaleDateString([
                         'pt-br',
                      ]),
-                     penalty: Intl.NumberFormat(['pt-br'], {
+                     penalty: item.multa,
+                     penaltyAsString: Intl.NumberFormat(['pt-br'], {
                         style: 'currency',
                         currency: 'BRL',
                         minimumFractionDigits: 2,
@@ -127,11 +130,21 @@ function Dashboard({}: Props) {
          return;
       }
 
+      const isAscending = isAscendingMap[lastField];
+
       setApiData((oldState) => {
          const apiDataClone = Array.from(oldState);
 
          return apiDataClone.sort((a, b) =>
-            sortByString(isAscendingMap[lastField])(a[lastField], b[lastField]),
+            typeof a[lastField] === 'number'
+               ? sortByNumber(isAscending)(
+                    a[lastField] as number,
+                    b[lastField] as number,
+                 )
+               : sortByString(isAscending)(
+                    a[lastField] as string,
+                    b[lastField] as string,
+                 ),
          );
       });
    }, [orderDirection]);
@@ -315,7 +328,7 @@ function Dashboard({}: Props) {
                            {data.date}
                         </TableData>
                         <TableData hidden={isColumnHidden('penalty')}>
-                           {data.penalty}
+                           {data.penaltyAsString}
                         </TableData>
                         <TableData hidden={isColumnHidden('status')}>
                            {data.status}
