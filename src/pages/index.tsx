@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
+import { Helmet } from 'react-helmet';
+
 import PageSection from '@c-atoms/PageSection';
 import Heading from '@c-atoms/Heading';
 import Form from '@c-atoms/Form';
@@ -33,6 +35,10 @@ function Login({ dispatch }: any) {
 
    return (
       <Page>
+         <Helmet>
+            <title>Entrar - Cidade Alta</title>
+         </Helmet>
+
          <Heading>Aqui ficará um formulário</Heading>
          <Form onSubmit={handleSubmit}>
             <RequiredInput //

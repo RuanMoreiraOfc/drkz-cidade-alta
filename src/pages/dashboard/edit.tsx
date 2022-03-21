@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import api from '@services/api';
 
 import { Fragment } from 'react';
+import { Helmet } from 'react-helmet';
 
 import PageSection from '@c-atoms/PageSection';
 import Heading from '@c-atoms/Heading';
@@ -161,6 +162,10 @@ function DashboardEdit({}: Props) {
 
    return (
       <Page>
+         <Helmet>
+            <title>Editar Código Penal - Cidade Alta</title>
+         </Helmet>
+
          {error && error.blockingRender ? (
             <p>{error.message}</p>
          ) : (

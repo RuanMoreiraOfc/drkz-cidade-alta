@@ -20,6 +20,7 @@ import sortByString from '@libs/sortByString';
 import api from '@services/api';
 
 import { Fragment } from 'react';
+import { Helmet } from 'react-helmet';
 
 import PageSection from '@c-atoms/PageSection';
 import Heading from '@c-atoms/Heading';
@@ -245,6 +246,10 @@ function Dashboard({}: Props) {
 
    return (
       <Page>
+         <Helmet>
+            <title>Códigos Penais - Cidade Alta</title>
+         </Helmet>
+
          <Heading>Dashboard</Heading>
 
          <Form>

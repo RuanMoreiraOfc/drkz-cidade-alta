@@ -8,6 +8,7 @@ import parseCurrency from '@libs/parseCurrency';
 import api from '@services/api';
 
 import { Fragment } from 'react';
+import { Helmet } from 'react-helmet';
 
 import PageSection from '@c-atoms/PageSection';
 import Heading from '@c-atoms/Heading';
@@ -129,6 +130,9 @@ function DashboardView({}: Props) {
 
    return (
       <Page>
+         <Helmet>
+            <title>Visualizar Código Penal - Cidade Alta</title>
+         </Helmet>
          {error?.blockingRender ? (
             <p>{error.message}</p>
          ) : (
