@@ -61,14 +61,15 @@ function Dashboard({}: Props) {
       message: ReactNode;
    } | null>(null);
    const [apiData, setApiData] = useState<ApiTreatedData[]>([]);
+   const [tableData, setTableData] = useState<ApiTreatedData[]>([]);
    const [orderDirection, setOrderDirection] = useState({
       lastField: null as ApiTreatedFields | null,
       isAscendingMap: {
-         name: true,
-         date: true,
-         penalty: true,
-         status: true,
-      } as Record<ApiTreatedFields, boolean>,
+         name: null,
+         date: null,
+         penalty: null,
+         status: null,
+      } as Record<ApiTreatedFields, boolean | null>,
    });
 
    useEffect(() => {
@@ -90,34 +91,34 @@ function Dashboard({}: Props) {
             return;
          }
 
+         const treatedData = criminalCodeResponse.data.flatMap<ApiTreatedData>(
+            (item) => {
+               return {
+                  id: item.id,
+                  name: item.nome,
+                  date: new Date(item.dataCriacao).toLocaleDateString([
+                     'pt-br',
+                  ]),
+                  penalty: item.multa,
+                  penaltyAsString: Intl.NumberFormat(['pt-br'], {
+                     style: 'currency',
+                     currency: 'BRL',
+                     minimumFractionDigits: 2,
+                  }).format(item.multa),
+                  status: statusResponse.data.find(
+                     ({ id }) => id === item.status,
+                  )!.descricao,
+               };
+            },
+         );
+
+         const sortedData = Array.from(treatedData).sort((a, b) =>
+            sortByString(true)(a.name, b.name),
+         );
+
          setError(null);
-         setApiData(() => {
-            const treatedData =
-               criminalCodeResponse.data.flatMap<ApiTreatedData>((item) => {
-                  return {
-                     id: item.id,
-                     name: item.nome,
-                     date: new Date(item.dataCriacao).toLocaleDateString([
-                        'pt-br',
-                     ]),
-                     penalty: item.multa,
-                     penaltyAsString: Intl.NumberFormat(['pt-br'], {
-                        style: 'currency',
-                        currency: 'BRL',
-                        minimumFractionDigits: 2,
-                     }).format(item.multa),
-                     status: statusResponse.data.find(
-                        ({ id }) => id === item.status,
-                     )!.descricao,
-                  };
-               });
-
-            const sortedData = Array.from(treatedData).sort((a, b) =>
-               sortByString(true)(a.name, b.name),
-            );
-
-            return sortedData;
-         });
+         setApiData(sortedData);
+         setTableData(sortedData);
       }
 
       fetchData();
@@ -132,7 +133,12 @@ function Dashboard({}: Props) {
 
       const isAscending = isAscendingMap[lastField];
 
-      setApiData((oldState) => {
+      if (isAscending === null) {
+         setTableData(apiData);
+         return;
+      }
+
+      setTableData((oldState) => {
          const apiDataClone = Array.from(oldState);
 
          return apiDataClone.sort((a, b) =>
@@ -179,10 +185,11 @@ function Dashboard({}: Props) {
                return {
                   lastField: orderBy,
                   isAscendingMap:
-                     oldLastField !== orderBy
+                     oldLastField !== orderBy ||
+                     oldIsAscendingMap[orderBy] === false
                         ? {
                              ...oldIsAscendingMap,
-                             [orderBy]: true,
+                             [orderBy]: null,
                           }
                         : {
                              ...oldIsAscendingMap,
@@ -208,19 +215,19 @@ function Dashboard({}: Props) {
             return;
          }
 
-         setApiData((oldState) => oldState.filter((data) => id !== data.id));
+         setTableData((oldState) => oldState.filter((data) => id !== data.id));
 
          const [hasCriminalCodeFailed] = await api.delete(`/codigopenal/${id}`);
 
          if (hasCriminalCodeFailed) {
-            setApiData(apiData);
+            setTableData(tableData);
             setError({
                blockingRender: false,
                message: (
                   <Fragment>
                      Não foi possível deletar esse código penal de nome{' '}
                      <strong>
-                        {apiData.find((data) => id === data.id)!.name}
+                        {tableData.find((data) => id === data.id)!.name}
                      </strong>
                   </Fragment>
                ),
@@ -319,7 +326,7 @@ function Dashboard({}: Props) {
             </thead>
             <tbody>
                {error?.blockingRender !== true &&
-                  apiData.map((data) => (
+                  tableData.map((data) => (
                      <TableRow key={data.id}>
                         <TableData hidden={isColumnHidden('name')}>
                            {data.name}
@@ -429,8 +436,9 @@ const Table = styled.table`
 
 const TableRow = styled.tr``;
 
-const TableHeader = styled.th<{ isAscending?: boolean }>`
+const TableHeader = styled.th<{ isAscending?: boolean | null }>`
    padding: 0.8rem;
+   padding-right: 3.2rem;
 
    border: 1px solid var(--c-gray-200);
 
@@ -439,10 +447,11 @@ const TableHeader = styled.th<{ isAscending?: boolean }>`
    cursor: pointer;
    user-select: none;
 
+   position: relative;
+
+   &:before,
    &:after {
       content: '';
-
-      opacity: ${(props) => (props.isAscending === undefined ? '0' : '1')};
 
       width: 0;
       height: 0;
@@ -450,20 +459,33 @@ const TableHeader = styled.th<{ isAscending?: boolean }>`
 
       border: 0.8rem solid transparent;
       border-top-color: var(--c-white);
+      // border-bottom-color: var(--c-white);
 
       text-align: center;
 
       display: block;
       transform-origin: center;
-      ${(props) =>
-         props.isAscending === false
-            ? 'transform: translateY(-25%) rotate(180deg)'
-            : 'transform: translateY(50%)'};
 
-      @media (min-width: 768px) {
-         display: inline-block;
-         margin: 0 0.8rem;
-      }
+      position: absolute;
+      right: 0.8rem;
+   }
+
+   &:before {
+      opacity: ${(props) =>
+         props.isAscending === undefined || props.isAscending === true
+            ? '0'
+            : '1'};
+
+      transform: rotateX(180deg) translateY(50%);
+   }
+
+   &:after {
+      opacity: ${(props) =>
+         props.isAscending === undefined || props.isAscending === false
+            ? '0'
+            : '1'};
+
+      transform: translateY(-50%);
    }
 `;
 
