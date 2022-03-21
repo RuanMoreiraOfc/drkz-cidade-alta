@@ -77,6 +77,10 @@ const GlobalStyle = createGlobalStyle`
     font-family: var(--ff-heading);
   }
 
+  input, textarea {
+    font-family: var(--ff-body);
+  }
+
   nav {
     display: contents;
   }
