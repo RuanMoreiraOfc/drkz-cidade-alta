@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export default styled.button<{ textColor: string; bgColor: string }>`
+export default styled.button<Props>`
    padding: 0.8rem;
 
    border-radius: 0.4rem;
@@ -19,3 +19,9 @@ export default styled.button<{ textColor: string; bgColor: string }>`
       filter: brightness(1.4);
    }
 `;
+export type { Props as ButtonProps };
+
+type Props = {
+   textColor: string;
+   bgColor: string;
+};
