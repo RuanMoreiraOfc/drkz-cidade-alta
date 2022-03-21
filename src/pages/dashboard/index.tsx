@@ -437,9 +437,10 @@ const TableHeader = styled.th<{ isAscending?: boolean | null }>`
    padding: 0.8rem;
    padding-right: 3.2rem;
 
-   border: 1px solid var(--c-gray-200);
+   border: 1px solid var(--c-gray-400);
 
    color: var(--c-blue-500);
+   background-color: var(--c-gray-800);
 
    cursor: pointer;
    user-select: none;
