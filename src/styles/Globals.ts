@@ -1,5 +1,3 @@
-import CloseIcon from '../assets/close.svg';
-
 import { createGlobalStyle } from 'styled-components';
 
 export { GlobalStyle };
