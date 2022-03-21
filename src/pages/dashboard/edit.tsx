@@ -13,7 +13,7 @@ import Form from '@c-atoms/Form';
 import RequiredInput from '@c-atoms/RequiredInput';
 import Button from '@c-atoms/Button';
 
-export default Dashboard;
+export default DashboardEdit;
 
 type ApiData = {
    id: number;
@@ -38,7 +38,7 @@ type ApiFields = Exclude<keyof ApiData, 'id' | 'dataCriacao'>;
 
 type Props = {};
 
-function Dashboard({}: Props) {
+function DashboardEdit({}: Props) {
    const idParam = Number(useLocation().pathname.split('/').slice(-1)[0]);
    const navigate = useNavigate();
    const [error, setError] = useState<{
