@@ -5,6 +5,7 @@ import Login from '@pages/index';
 import Dashboard from '@pages/dashboard';
 import DashboardView from '@pages/dashboard/view';
 import DashboardEdit from '@pages/dashboard/edit';
+import DashboardCreate from '@pages/dashboard/create';
 
 export default MyApp;
 
@@ -29,6 +30,10 @@ function MyApp({}: Props) {
             <Route
                path='/dashboard/edit/*'
                element={<AuthMiddleware render={<DashboardEdit />} />}
+            />
+            <Route
+               path='/dashboard/create'
+               element={<AuthMiddleware render={<DashboardCreate />} />}
             />
             <Route
                path='*'
