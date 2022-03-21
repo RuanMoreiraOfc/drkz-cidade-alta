@@ -39,7 +39,8 @@ function Login({ dispatch }: any) {
             <title>Entrar - Cidade Alta</title>
          </Helmet>
 
-         <Heading>Aqui ficará um formulário</Heading>
+         <Heading>Entre na sua conta para prosseguir</Heading>
+
          <Form onSubmit={handleSubmit}>
             <RequiredInput //
                name='username'
