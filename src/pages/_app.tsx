@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import AuthMiddleware from '@pages/authMiddleware';
 import Login from '@pages/index';
 import Dashboard from '@pages/dashboard';
+import DashboardView from '@pages/dashboard/view';
 import DashboardEdit from '@pages/dashboard/edit';
 
 export default MyApp;
@@ -20,6 +21,10 @@ function MyApp({}: Props) {
             <Route
                path='/dashboard'
                element={<AuthMiddleware render={<Dashboard />} />}
+            />
+            <Route
+               path='/dashboard/view/*'
+               element={<AuthMiddleware render={<DashboardView />} />}
             />
             <Route
                path='/dashboard/edit/*'
