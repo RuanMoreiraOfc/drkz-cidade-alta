@@ -11,7 +11,7 @@ O Departamento de Polícia do Cidade Alta está precisando de um sistema para co
   - [x] Botão para inclusão de um novo registro.
   - [x] Permitir editar, visualizar e excluir (com confirmação) o registro.
 - Tela de Visualização com todas as informações do código penal.
-- Tela de Edição.
+- [x] Tela de Edição.
 - Tela de Inclusão.
 
 Os dados estão disponíveis na API(Provida com JSON Placeholder) para consumo no seguinte endpoint:https://my-json-server.typicode.com/cidadealta/exercise
