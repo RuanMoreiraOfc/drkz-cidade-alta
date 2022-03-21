@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { FaReply } from 'react-icons/fa';
+
 import styled from 'styled-components';
 
 import parseCurrency from '@libs/parseCurrency';
@@ -9,11 +9,11 @@ import parseCurrency from '@libs/parseCurrency';
 import api from '@services/api';
 
 import { Fragment } from 'react';
-import { Link } from 'react-router-dom';
 
 import PageSection from '@c-atoms/PageSection';
 import Heading from '@c-atoms/Heading';
-import Button from '@c-atoms/Button';
+
+import ReturnLink from '@c-molecules/ReturnLink';
 
 export default DashboardView;
 
@@ -135,9 +135,7 @@ function DashboardView({}: Props) {
          ) : (
             apiData.name && (
                <Fragment>
-                  <GoBackButton to='..'>
-                     <FaReply /> Voltar
-                  </GoBackButton>
+                  <ReturnLink to='../..' />
 
                   <Heading>Código penal - {apiData.name}</Heading>
 
@@ -178,16 +176,6 @@ function DashboardView({}: Props) {
 
 const Page = styled(PageSection)`
    max-width: 750px;
-`;
-
-const GoBackButton = styled(Button as typeof Link).attrs({
-   as: Link,
-   textColor: 'var(--c-white)',
-   bgColor: 'green',
-})`
-   text-decoration: unset;
-
-   justify-self: left;
 `;
 
 const Table = styled.table`

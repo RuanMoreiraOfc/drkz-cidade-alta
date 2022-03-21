@@ -13,6 +13,8 @@ import Form from '@c-atoms/Form';
 import RequiredInput from '@c-atoms/RequiredInput';
 import Button from '@c-atoms/Button';
 
+import ReturnLink from '@c-molecules/ReturnLink';
+
 export default DashboardEdit;
 
 type ApiData = {
@@ -164,6 +166,8 @@ function DashboardEdit({}: Props) {
          ) : (
             formData.name && (
                <Fragment>
+                  <ReturnLink to='../..' />
+
                   <Heading>Editando - {formData.name}</Heading>
 
                   {error && <ErrorMessage>{error.message}</ErrorMessage>}
