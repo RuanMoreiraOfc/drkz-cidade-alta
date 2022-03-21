@@ -5,6 +5,8 @@ import styled from 'styled-components';
 
 import PageSection from '@c-atoms/PageSection';
 import Heading from '@c-atoms/Heading';
+import Form from '@c-atoms/Form';
+import RequiredInput from '@c-atoms/RequiredInput';
 import Button from '@c-atoms/Button';
 
 export default connect()(Login);
@@ -52,22 +54,6 @@ function Login({ dispatch }: any) {
 
 const Page = styled(PageSection)`
    max-width: 500px;
-`;
-
-const Form = styled.form`
-   display: grid;
-   gap: 2.4rem;
-`;
-
-const RequiredInput = styled.input.attrs((props) => ({
-   required: true,
-}))`
-   padding: 0.8rem;
-
-   border: none;
-   border-radius: 0.4rem;
-
-   font-size: 1.8rem;
 `;
 
 const SubmitButton = styled(Button).attrs((props) => ({
