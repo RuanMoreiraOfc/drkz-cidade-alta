@@ -16,6 +16,8 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
+      "@t-utils/*": ["test/utils/*"],
+
       "@~types/*": ["src/@types/*"],
       "@libs/*": ["src/libs/*"],
 
