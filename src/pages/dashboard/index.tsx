@@ -14,6 +14,7 @@ import {
 } from 'react-icons/fa';
 
 import parseCurrency from '@libs/parseCurrency';
+import parseCurrencyDescription from '@libs/parseCurrencyDescription';
 import sortByNumber from '@libs/sortByNumber';
 import sortByString from '@libs/sortByString';
 
@@ -24,7 +25,10 @@ import { Helmet } from 'react-helmet';
 
 import PageSection from '@c-atoms/PageSection';
 import Heading from '@c-atoms/Heading';
+import ReadableHiddenText from '@c-atoms/ReadableHiddenText';
 import Button from '@c-atoms/Button';
+
+import AccessibleText from '@c-molecules/AccessibleText';
 
 export default Dashboard;
 
@@ -40,12 +44,17 @@ type ApiTreatedData = {
    id: number;
    name: string;
    date: string;
+   dateLabel: string;
    penalty: number;
    penaltyAsString: string;
+   penaltyLabel: string;
    status: string;
 };
 
-type ApiTreatedFields = Exclude<keyof ApiTreatedData, 'id' | 'penaltyAsString'>;
+type ApiTreatedFields = Exclude<
+   keyof ApiTreatedData,
+   'id' | 'penaltyAsString' | 'penaltyLabel' | 'dateLabel'
+>;
 
 type Props = {};
 
@@ -93,16 +102,22 @@ function Dashboard({}: Props) {
             return;
          }
 
+         const __createDateString =
+            (item: ApiData) => (style: 'short' | 'long') =>
+               new Date(item.dataCriacao).toLocaleDateString(['pt-br'], {
+                  dateStyle: style,
+               });
+
          const treatedData = criminalCodeResponse.data.flatMap<ApiTreatedData>(
             (item) => {
                return {
                   id: item.id,
                   name: item.nome,
-                  date: new Date(item.dataCriacao).toLocaleDateString([
-                     'pt-br',
-                  ]),
+                  date: __createDateString(item)('short'),
+                  dateLabel: __createDateString(item)('long'),
                   penalty: item.multa,
                   penaltyAsString: parseCurrency(['pt-br'], 'BRL')(item.multa),
+                  penaltyLabel: parseCurrencyDescription()(item.multa),
                   status: statusResponse.data.find(
                      ({ id }) => id === item.status,
                   )!.descricao,
@@ -284,7 +299,11 @@ function Dashboard({}: Props) {
          </Form>
 
          {error?.message && <p>{error.message}</p>}
-         <Table>
+
+         <ReadableHiddenText id='table-description'>
+            Tabela de códigos penais
+         </ReadableHiddenText>
+         <Table aria-describedby='table-description'>
             <thead>
                <TableRow>
                   <TableHeader
@@ -329,15 +348,29 @@ function Dashboard({}: Props) {
             <tbody>
                {error?.blockingRender !== true &&
                   tableData.map((data) => (
-                     <TableRow key={data.id}>
+                     <TableRow key={data.id} aria-atomic='true'>
                         <TableData hidden={isColumnHidden('name')}>
                            {data.name}
                         </TableData>
-                        <TableData hidden={isColumnHidden('date')}>
-                           {data.date}
+                        <TableData
+                           hidden={isColumnHidden('date')}
+                           title={data.dateLabel}
+                           aria-hidden='false'
+                        >
+                           <AccessibleText
+                              readAs={data.dateLabel}
+                              showAs={data.date}
+                           />
                         </TableData>
-                        <TableData hidden={isColumnHidden('penalty')}>
-                           {data.penaltyAsString}
+                        <TableData
+                           hidden={isColumnHidden('penalty')}
+                           title={data.penaltyLabel}
+                           aria-hidden='false'
+                        >
+                           <AccessibleText
+                              readAs={data.penaltyLabel}
+                              showAs={data.penaltyAsString}
+                           />
                         </TableData>
                         <TableData hidden={isColumnHidden('status')}>
                            {data.status}
@@ -354,14 +387,17 @@ function Dashboard({}: Props) {
                               <CustomButton
                                  onClick={handleDelete(data.id)}
                                  children={<DeleteIcon />}
+                                 title={`Deletar '${data.name}'`}
                               />
                               <LinkButton
                                  to={`./view/${data.id}`}
                                  children={<ViewIcon />}
+                                 title={`Ver mais sobre '${data.name}'`}
                               />
                               <LinkButton
                                  to={`./edit/${data.id}`}
                                  children={<EditIcon />}
+                                 title={`Editar '${data.name}'`}
                               />
                            </TableDataActions>
                         </TableData>
