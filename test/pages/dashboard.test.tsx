@@ -59,11 +59,11 @@ describe('Dashboard', () => {
 
   describe('Table', () => {
     it('should render all fields', () => {
-      const { container, render } = createPageContainer();
+      const { render, query } = createPageContainer();
 
       render(Dashboard);
 
-      const tableHeaderList = Array.from(container.querySelectorAll('th'));
+      const tableHeaderList = query.many('th');
       const activeTableHeaderList = tableHeaderList.filter(
         (element) => element.hidden !== true,
       );
@@ -81,10 +81,10 @@ describe('Dashboard', () => {
     });
 
     it('should render only active fields', () => {
-      const { container, render, interact } = createPageContainer();
+      const { render, query, interact } = createPageContainer();
 
       render(Dashboard);
-      const nonFirstCheckboxList = container.querySelectorAll(
+      const nonFirstCheckboxList = query.many(
         '*:nth-child(1n+2) > input[type=checkbox]',
       );
       nonFirstCheckboxList.forEach((checkbox) =>
@@ -93,7 +93,7 @@ describe('Dashboard', () => {
         }),
       );
 
-      const tableHeaderList = Array.from(container.querySelectorAll('th'));
+      const tableHeaderList = query.many('th');
       const activeTableHeaderList = tableHeaderList.filter(
         (element) => element.hidden !== true,
       );

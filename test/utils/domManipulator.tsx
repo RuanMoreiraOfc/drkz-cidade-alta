@@ -22,13 +22,23 @@ function createPageContainer() {
    );
 
    const container = document.createElement('div');
+   container.id = 'root';
 
    return {
-      container,
       render: (Component: FunctionComponent<any>) => {
          act(() => {
             render(<AppDependencies children={<Component />} />, container);
          });
+      },
+      query: {
+         single<T = HTMLElement>(selector: string) {
+            return container.querySelector(selector) as unknown as T;
+         },
+         many<T = HTMLElement>(selector: string) {
+            return Array.from(
+               container.querySelectorAll(selector),
+            ) as unknown as T[];
+         },
       },
       interact: (() => {
          const interactions = { ...Simulate };
