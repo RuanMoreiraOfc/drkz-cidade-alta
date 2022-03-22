@@ -8,4 +8,8 @@ export default defineConfig({
     react(), //
     tsconfigPaths(),
   ],
+  test: {
+    globals: true,
+    environment: 'jsdom',
+  },
 });
