@@ -482,7 +482,6 @@ const CustomButton = styled(Button).attrs({
    font-size: 1.6rem;
 `;
 
-// FIXME: React props leaking
 const LinkButton = styled(CustomButton as typeof Link).attrs({
    as: Link,
 })`

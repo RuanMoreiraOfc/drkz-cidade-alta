@@ -1,13 +1,35 @@
+import type { DefaultTheme } from 'styled-components';
 import styled from 'styled-components';
 
-export default styled.button<Props>`
+const __isFunction = (obj: unknown): obj is Function =>
+   typeof obj === 'function';
+
+export default styled.button.withConfig<Props>({
+   shouldForwardProp: (prop, defaultValidatorFn) => defaultValidatorFn(prop),
+})`
    padding: 0.8rem;
 
    border-radius: 0.4rem;
    border: none;
 
-   color: ${(props) => props.textColor};
-   background-color: ${(props) => props.bgColor};
+   color: ${(props) => {
+      const { textColor: thisProp } = props;
+
+      if (__isFunction(thisProp)) {
+         return thisProp(props);
+      }
+
+      return thisProp;
+   }};
+   background-color: ${(props) => {
+      const { bgColor: thisProp } = props;
+
+      if (__isFunction(thisProp)) {
+         return thisProp(props);
+      }
+
+      return thisProp;
+   }};
 
    cursor: pointer;
 
@@ -22,6 +44,6 @@ export default styled.button<Props>`
 export type { Props as ButtonProps };
 
 type Props = {
-   textColor: string;
-   bgColor: string;
+   textColor: string | ((props: { theme: DefaultTheme }) => string);
+   bgColor: string | ((props: { theme: DefaultTheme }) => string);
 };
