@@ -4,26 +4,6 @@ export { GlobalStyle };
 
 const GlobalStyle = createGlobalStyle`
   :root {
-    --ff-heading: Roboto, sans-serif;
-    --ff-body: Roboto, sans-serif;
-
-    --c-white: #FFF;
-    --c-black: #222;
-
-    --c-blue-900: #1E3E5F;
-    --c-blue-500: #3770AC;
-    --c-blue-50: #C6E7F8;
-    --c-gray-900: #181B23;
-    --c-gray-800: #1F2029;
-    --c-gray-700: #353646;
-    --c-gray-600: #4B4D63;
-    --c-gray-500: #616480;
-    --c-gray-400: #797D9A;
-    --c-gray-300: #9699B0;
-    --c-gray-200: #B3B5C6;
-    --c-gray-100: #D1D2DC;
-    --c-gray-50: #EEEEF2;
-
     font-size: 37.5%; // 6px
 
     @media (min-width: 425px) {
@@ -61,9 +41,9 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background-color: var(--c-gray-900);
-    color: var(--c-gray-50);
-    font-family: var(--ff-body);
+    background-color: ${(props) => props.theme.colors.gray.s900};
+    color: ${(props) => props.theme.colors.gray.s50};
+    font-family: ${(props) => props.theme.fonts.family.body};
 
     font-size: 2rem;
     @media (min-width: 768px) {
@@ -72,11 +52,11 @@ const GlobalStyle = createGlobalStyle`
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--ff-heading);
+    font-family: ${(props) => props.theme.fonts.family.heading};
   }
 
   input, textarea {
-    font-family: var(--ff-body);
+    font-family: ${(props) => props.theme.fonts.family.body};
   }
 
   nav {

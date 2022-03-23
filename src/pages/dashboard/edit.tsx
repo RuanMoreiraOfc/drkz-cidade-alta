@@ -279,10 +279,10 @@ const LabeledField = ({
    </Label>
 );
 
-const CustomButton = styled(Button).attrs({
-   textColor: 'var(--c-white)',
+const CustomButton = styled(Button).attrs(({ theme }) => ({
+   textColor: theme.colors.white,
    bgColor: 'green',
-})`
+}))`
    flex: 1;
    font-size: 1.8rem;
    font-weight: bold;

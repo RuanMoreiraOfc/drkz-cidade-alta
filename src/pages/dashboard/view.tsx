@@ -215,12 +215,12 @@ const Table = styled.table`
 `;
 
 const TableRow = styled.tr`
-   color: var(--c-white);
-   background-color: var(--c-blue-500);
+   color: ${(props) => props.theme.colors.white};
+   background-color: ${(props) => props.theme.colors.blue.s500};
 
    &:nth-child(2n) {
-      color: var(--c-blue-900);
-      background-color: var(--c-blue-50);
+      color: ${(props) => props.theme.colors.blue.s900};
+      background-color: ${(props) => props.theme.colors.blue.s50};
    }
 `;
 
@@ -228,7 +228,7 @@ const TableHeader = styled.th`
    width: 15ch;
    padding: 0.8rem;
 
-   border: 5px solid var(--c-gray-900);
+   border: 5px solid ${(props) => props.theme.colors.gray.s900};
 
    vertical-align: initial;
 
@@ -240,7 +240,7 @@ const TableHeader = styled.th`
 const TableData = styled.td`
    padding: 0.8rem;
 
-   border: 5px solid var(--c-gray-900);
+   border: 5px solid ${(props) => props.theme.colors.gray.s900};
 
    text-align: justify;
 `;

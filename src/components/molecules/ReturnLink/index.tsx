@@ -24,11 +24,13 @@ ReturnLink.defaultProps = {
 } as Props;
 
 // FIXME: MAKE AVAILABLE `textColor` & `bgColor` PROPS
-const GoBackButton = styled(Button as typeof Link).attrs<Props>({
-   as: Link,
-   textColor: 'var(--c-white)',
-   bgColor: 'var(--c-blue-500)',
-})`
+const GoBackButton = styled(Button as typeof Link).attrs<Props>(
+   ({ theme }) => ({
+      as: Link,
+      textColor: theme.colors.white,
+      bgColor: theme.colors.blue.s500,
+   }),
+)`
    text-decoration: unset;
 
    justify-self: left;

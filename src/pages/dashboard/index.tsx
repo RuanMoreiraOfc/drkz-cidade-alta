@@ -463,8 +463,10 @@ const LabeledCheckbox = (props: {
    onToggle: ChangeEventHandler;
 }) => (
    <Label
-      textColor='var(--c-white)'
-      bgColor={props.isChecked ? 'var(--c-blue-500)' : 'var(--c-gray-400)'}
+      textColor={({ theme }) => theme.colors.white}
+      bgColor={({ theme }) =>
+         props.isChecked ? theme.colors.blue.s500 : theme.colors.gray.s400
+      }
    >
       <Checkbox
          name={props.value}
@@ -475,10 +477,10 @@ const LabeledCheckbox = (props: {
    </Label>
 );
 
-const CustomButton = styled(Button).attrs({
-   textColor: 'var(--c-white)',
+const CustomButton = styled(Button).attrs(({ theme }) => ({
+   textColor: theme.colors.white,
    bgColor: 'green',
-})`
+}))`
    font-size: 1.6rem;
 `;
 
@@ -502,10 +504,10 @@ const TableHeader = styled.th<{ isAscending?: boolean | null }>`
    padding: 0.8rem;
    padding-right: 3.2rem;
 
-   border: 1px solid var(--c-gray-400);
+   border: 1px solid ${(props) => props.theme.colors.gray.s400};
 
-   color: var(--c-blue-500);
-   background-color: var(--c-gray-800);
+   color: ${(props) => props.theme.colors.blue.s500};
+   background-color: ${(props) => props.theme.colors.gray.s800};
 
    cursor: pointer;
    user-select: none;
@@ -521,8 +523,7 @@ const TableHeader = styled.th<{ isAscending?: boolean | null }>`
       margin: 0 auto;
 
       border: 0.8rem solid transparent;
-      border-top-color: var(--c-white);
-      // border-bottom-color: var(--c-white);
+      border-top-color: ${(props) => props.theme.colors.white};
 
       text-align: center;
 
@@ -554,7 +555,7 @@ const TableHeader = styled.th<{ isAscending?: boolean | null }>`
 
 const TableData = styled.td`
    padding: 0.8rem;
-   border: 1px solid var(--c-gray-600);
+   border: 1px solid ${(props) => props.theme.colors.gray.s600};
 `;
 
 const TableDataActions = styled.div`
@@ -572,10 +573,10 @@ const ActionsBox = styled.div`
    align-items: center;
 `;
 
-const QuitButton = styled(Button).attrs({
-   textColor: 'var(--c-white)',
+const QuitButton = styled(Button).attrs(({ theme }) => ({
+   textColor: theme.colors.white,
    bgColor: 'firebrick',
-})`
+}))`
    font-size: 2.4rem;
 
    display: flex;

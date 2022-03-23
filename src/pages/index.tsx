@@ -63,10 +63,10 @@ const Page = styled(PageSection)`
    max-width: 500px;
 `;
 
-const SubmitButton = styled(Button).attrs((props) => ({
+const SubmitButton = styled(Button).attrs(({ theme }) => ({
    type: 'submit',
-   textColor: 'var(--c-white)',
-   bgColor: 'var(--c-blue-900)',
+   textColor: theme.colors.white,
+   bgColor: theme.colors.blue.s900,
 }))`
    font-size: 2.4rem;
 `;
