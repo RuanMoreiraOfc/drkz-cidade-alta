@@ -9,21 +9,11 @@ import Button from '@c-atoms/Button';
 
 export default ReturnLink;
 
-const GoBackButton = styled(Button as typeof Link).attrs({
-   as: Link,
-   textColor: 'var(--c-white)',
-   bgColor: 'var(--c-blue-500)',
-})`
-   text-decoration: unset;
-
-   justify-self: left;
-`;
-
 type Props = Partial<ButtonProps> & LinkProps;
 
-function ReturnLink({ to, ...restProps }: Props) {
+function ReturnLink(props: Props) {
    return (
-      <GoBackButton to={to} {...restProps}>
+      <GoBackButton {...props}>
          <ArrowIcon /> Voltar
       </GoBackButton>
    );
@@ -32,3 +22,14 @@ function ReturnLink({ to, ...restProps }: Props) {
 ReturnLink.defaultProps = {
    to: '..',
 } as Props;
+
+// FIXME: MAKE AVAILABLE `textColor` & `bgColor` PROPS
+const GoBackButton = styled(Button as typeof Link).attrs<Props>({
+   as: Link,
+   textColor: 'var(--c-white)',
+   bgColor: 'var(--c-blue-500)',
+})`
+   text-decoration: unset;
+
+   justify-self: left;
+`;
