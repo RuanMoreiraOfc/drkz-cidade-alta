@@ -106,5 +106,19 @@ describe('Dashboard', () => {
         '',
       ]);
     });
+
+    it('should display table data sorted by name ascending by default', async () => {
+      const { renderAndPromise, query } = createPageContainer();
+
+      await renderAndPromise(Dashboard);
+
+      const tableDataList = query.many('tbody tr td:nth-child(1)');
+      expect(tableDataList).toHaveLength(3);
+      expect(tableDataList.map((element) => element.textContent)).toEqual([
+        'A', //
+        'B',
+        'C',
+      ]);
+    });
   });
 });
