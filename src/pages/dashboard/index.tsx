@@ -373,7 +373,6 @@ function Dashboard({ dispatch }: Props) {
                         <TableData
                            hidden={isColumnHidden('date')}
                            title={data.dateLabel}
-                           aria-hidden='false'
                         >
                            <AccessibleText
                               readAs={data.dateLabel}
@@ -383,7 +382,6 @@ function Dashboard({ dispatch }: Props) {
                         <TableData
                            hidden={isColumnHidden('penalty')}
                            title={data.penaltyLabel}
-                           aria-hidden='false'
                         >
                            <AccessibleText
                               readAs={data.penaltyLabel}

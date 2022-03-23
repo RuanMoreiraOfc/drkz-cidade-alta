@@ -24,10 +24,14 @@ const Base = styled.span`
    position: relative;
 `;
 
-const ReadableHiddenText = styled.span`
+const ReadableHiddenText = styled.span.attrs({
+   'aria-hidden': false,
+})`
    white-space: nowrap;
 
    visibility: hidden;
+   overflow: hidden;
+
    position: absolute;
    top: 0;
    right: 0;
