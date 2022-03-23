@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import parseCurrency from '@libs/parseCurrency';
+import parseCurrencyDescription from '@libs/parseCurrencyDescription';
 
 import api from '@services/api';
 
@@ -14,6 +15,7 @@ import PageSection from '@c-atoms/PageSection';
 import Heading from '@c-atoms/Heading';
 
 import ReturnLink from '@c-molecules/ReturnLink';
+import AccessibleText from '@c-molecules/AccessibleText';
 
 export default DashboardView;
 
@@ -32,7 +34,9 @@ type ApiTreatedData = {
    name: string;
    description: string;
    date: string;
+   dateLabel: string;
    penaltyAsString: string;
+   penaltyLabel: string;
    jailTime: number;
    status: string;
 };
@@ -106,17 +110,25 @@ function DashboardView({}: Props) {
             const criminalCodeData = criminalCodeResponse.data;
             const statusData = statusResponse.data;
 
+            const __getDateString = (style: 'short' | 'long') =>
+               new Date(criminalCodeData.dataCriacao).toLocaleDateString(
+                  ['pt-br'],
+                  {
+                     dateStyle: style,
+                  },
+               );
+
             return {
                id: criminalCodeData.id,
                name: criminalCodeData.nome,
-               date: new Date(criminalCodeData.dataCriacao).toLocaleDateString([
-                  'pt-br',
-               ]),
+               date: __getDateString('short'),
+               dateLabel: __getDateString('long'),
                description: criminalCodeData.descricao,
                penaltyAsString: parseCurrency(
                   ['pt-br'],
                   'BRL',
                )(criminalCodeData.multa),
+               penaltyLabel: parseCurrencyDescription()(criminalCodeData.multa),
                jailTime: criminalCodeData.tempoPrisao,
                status: statusData.find(
                   ({ id }) => id === criminalCodeData.status,
@@ -133,6 +145,7 @@ function DashboardView({}: Props) {
          <Helmet>
             <title>Visualizar Código Penal - Cidade Alta</title>
          </Helmet>
+
          {error?.blockingRender ? (
             <p>{error.message}</p>
          ) : (
@@ -140,9 +153,11 @@ function DashboardView({}: Props) {
                <Fragment>
                   <ReturnLink to='../..' />
 
-                  <Heading>Código penal - {apiData.name}</Heading>
+                  <Heading id='table-description'>
+                     Código penal - {apiData.name}
+                  </Heading>
 
-                  <Table>
+                  <Table aria-describedby='table-description'>
                      <tbody>
                         <TableRow>
                            <TableHeader>Nome</TableHeader>
@@ -154,11 +169,21 @@ function DashboardView({}: Props) {
                         </TableRow>
                         <TableRow>
                            <TableHeader>Data de Criação</TableHeader>
-                           <TableData>{apiData.date}</TableData>
+                           <TableData>
+                              <AccessibleText
+                                 showAs={apiData.date}
+                                 readAs={apiData.dateLabel}
+                              />
+                           </TableData>
                         </TableRow>
                         <TableRow>
                            <TableHeader>Multa</TableHeader>
-                           <TableData>{apiData.penaltyAsString}</TableData>
+                           <TableData>
+                              <AccessibleText
+                                 showAs={apiData.penaltyAsString}
+                                 readAs={apiData.penaltyLabel}
+                              />
+                           </TableData>
                         </TableRow>
                         <TableRow>
                            <TableHeader>Tempo de Prisão</TableHeader>
