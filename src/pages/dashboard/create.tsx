@@ -92,11 +92,13 @@ function DashboardCreate({}: Props) {
                   label='Multa (R$)'
                   type='number'
                   name='multa'
+                  min={0}
                />
                <LabeledField //
                   label='Dias Preso'
                   type='number'
                   name='tempoPrisao'
+                  min={0}
                />
             </FormInputs>
             <FormActions>
@@ -151,18 +153,20 @@ const Input = styled(RequiredInput)``;
 const LabeledField = ({
    label,
    type,
+   min,
    ...restProps
 }: {
    label: string;
    type?: InputHTMLAttributes<HTMLInputElement>['type'] | 'text-area';
    name: keyof ApiFields;
+   min?: InputHTMLAttributes<HTMLInputElement>['min'];
 }) => (
    <Label>
       <span>{label}:</span>
       {type === 'text-area' ? (
          <TextArea {...restProps} />
       ) : (
-         <Input type={type} {...restProps} />
+         <Input type={type} min={min} {...restProps} />
       )}
    </Label>
 );
