@@ -30,6 +30,14 @@ function createPageContainer() {
             render(<AppDependencies children={<Component />} />, container);
          });
       },
+      renderAndPromise: async (Component: FunctionComponent<any>) => {
+         await act(async () => {
+            await render(
+               <AppDependencies children={<Component />} />,
+               container,
+            );
+         });
+      },
       query: {
          single<T = HTMLElement>(selector: string) {
             return container.querySelector(selector) as unknown as T;
