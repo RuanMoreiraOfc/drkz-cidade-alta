@@ -1,6 +1,6 @@
 <h1 align="center">
 
-Exercise - Cidade Alta
+Exercício - Cidade Alta
 
 </h1>
 
@@ -25,30 +25,29 @@ Exercise - Cidade Alta
 
 </div>
 
-## About <span id="id-about"/>
+## Sobre <span id="id-about"/>
 
-This project is just a exercise passed by [Cidade Alta][btn-requester] team recruiter, in order to
-test my skills when I applied to a job of them.
+Esse projeto é apenas um exercício passado pelo time de recrutamento da [Cidade Alta][btn-requester], afim de testar minhas habilidades.
 
-### Exercise description:
+### Descrição do exercício:
 
-The police department from Cidade Alta needs a system to control the city's penal codes. In order to accomplish it will be necessary a application where the user will try to authenticate and with a approved response them will be able to retrieve, include, edit and view all details of the penal codes from Cidade Alta. The application must have:
+O Departamento de Polícia do Cidade Alta está precisando de um sistema para controlar os códigos penais da cidade. Para isso é necessário uma aplicação onde o usuário irá autenticar-se e após o sucesso poderá consultar, incluir, editar e visualizar os códigos penais da Cidade Alta. A aplicação deverá conter:
 
-- A page with username and password fields;
-- A page listing all penal codes with: name, date, penalty, status;
-  - Ordering
-  - Filtering
-  - Include Button
-  - Edit, View, Delete(with a confirmation dialog) Button.
-- A page listing all information from a unique penal code.
-- A edit page.
-- A include page.
+- Tela de autenticação com os campos de usuário e senha;
+- Tela de listagem dos Códigos Penais com os campos Nome, Data, Multa e Status.
+  - Ordenação
+  - Filtro
+  - Botão para inclusão de um novo registro.
+  - Permitir editar, visualizar e excluir (com confirmação) o registro.
+- Tela de Visualização com todas as informações do código penal.
+- Tela de Edição.
+- Tela de Inclusão.
 
-Api endpoint at: https://my-json-server.typicode.com/cidadealta/exercise
+Os dados estão disponíveis na API(Provida com JSON Placeholder) para consumo no seguinte endpoint: https://my-json-server.typicode.com/cidadealta/exercise
 
-## :triangular_ruler: Technology <span id="id-about"/>
+## :triangular_ruler: Tecnologia <span id="id-about"/>
 
-It was used on development:
+As seguintes ferramentas foram usadas na construção do projeto:
 
 [Vite]
 [Vitest]
@@ -60,7 +59,7 @@ It was used on development:
 
 ## :camera: Screenshots <span id="id-looking"/>
 
-##### [Skip Screenshots][btn-skip]
+##### [Pular Screenshots][btn-skip]
 
 #### Login(`/`):
 
@@ -71,95 +70,94 @@ It was used on development:
 ![dashboard]
 ![dashboard-filtered]
 
-#### View(`/dashboard/view`):
+#### Visualização(`/dashboard/view`):
 
 ![dashboard-view-redirect]
 
-#### View(`/dashboard/view/n`):
+#### Visualização(`/dashboard/view/n`):
 
 ![dashboard-view]
 
-#### Edit(`/dashboard/edit`):
+#### Edição(`/dashboard/edit`):
 
 ![dashboard-edit]
 
-#### Edit(`/dashboard/edit/n`):
+#### Edição(`/dashboard/edit/n`):
 
 ![dashboard-edit-redirect]
 
-#### Create(`/dashboard/create`):
+#### Criação(`/dashboard/create`):
 
 ![dashboard-create]
 
-## [:eyes: Preview][btn-preview] <span id="id-preview"/>
+## [:eyes: Demonstração][btn-preview] <span id="id-preview"/>
 
-## :electric_plug: Requirements <span id="id-clone"/>
+## :electric_plug: Pré-requisitos <span id="id-clone"/>
 
-Before to start, you will need have installed on your computer these programs:
+Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
 
 - [Git][btn-git]
 - [Node.js][btn-node]
 
-Also is good have a code editor like [VSCode][btn-vscode].
+Além disto é bom ter um editor para trabalhar com o código como [VSCode][btn-vscode].
 
-## :warning: Warnings
+## :warning: Atenção
 
-Yarn being used as package manager in this project, be preferred to **do not** commit
-`package-lock.json` if you're using npm!
+Yarn está sendo usando como gestor de pacotes neste projeto, recomendado não 'commitar' `package-lock.json` se você está usando npm!
 
-To install Yarn, go to your terminal and paste this command:
+Para instalar o yarn, vá ao seu terminal e cole esse comando:
 
 ```bash
 npm install yarn -g
 ```
 
-## :bulb: Do it by yourself
+## :bulb: Faça você mesmo
 
-##### In your terminal clone the repository and install the dependencies.
+##### No seu terminal clone o repositório e instale as dependências.
 
-###### - to clone the repository
+###### - para clonar o repositório
 
 ```bash
 git clone https://github.com/ruanmoreiraofc/drkz-cidade-alta.git
 ```
 
-###### - to enter into the folder
+###### - para entrar na pasta
 
 ```bash
 cd drkz-cidade-alta
 ```
 
-###### - to install the dependencies
+###### - para instalar as dependências
 
 ```bash
 yarn
 ```
 
-With all done, create a new .env file like this [example.][btn-example]
+Com as dependências instaladas, crie um arquivo .env como o deste [exemplo.][btn-example]
 
-##### Now run your project.
+##### Agora rode a aplicação.
 
-###### - to run the tests
+###### - para rodar os testes
 
 ```bash
 yarn test
 ```
 
-<small>using `yarn test:dev` will re-test without re-running the command.</small>
+<small>ao usar `yarn test:dev` ele entrará em modo continuo sendo assim não será rodar o comando novamente para poder rodar os testes.</small>
 
-###### - to run the server
+###### - para rodar o servidor
 
 ```bash
 yarn dev
 ```
 
-<small>with the server open, you will be able to see the application on [localhost][btn-localhost].</small>
+<small>com o servidor aberto, a aplicação ficará disponível no endereço [localhost][btn-localhost].</small>
 
-## :balance_scale: License <span id="id-license"/>
+## :balance_scale: Licença <span id="id-license"/>
 
-This project is under the MIT license. See the [LICENSE][btn-license] for more information.
+Este projeto está sob a Licença MIT. Leia a [LICENÇA][btn-license] para mais informações.
 
-# :boy: Author <span id="id-author"/>
+# :boy: Autor <span id="id-author"/>
 
 <div align="center">
 
@@ -173,7 +171,7 @@ This project is under the MIT license. See the [LICENSE][btn-license] for more i
 
   <!-- ![author-img] does not work with Github's default profile image -->
 
-Made with :heart: by Ruan Moreira de Jesus!
+Feito com :heart: por Ruan Moreira de Jesus!
 
 [![author-card-email]][author-btn-email]
 [![author-card-discord]][author-btn-discord]
@@ -193,28 +191,28 @@ Made with :heart: by Ruan Moreira de Jesus!
 [author-card-email]: https://img.shields.io/badge/Email--$?style=social&logo=microsoft-outlook
 [author-card-discord]: https://img.shields.io/badge/Discord--$?style=social&logo=discord
 [author-card-github]: https://img.shields.io/github/followers/ruanmoreiraofc?style=social
-[author-btn-email]: mailto:ruanmoreiraofc@hotmail.com 'Get in touch!'
+[author-btn-email]: mailto:ruanmoreiraofc@hotmail.com 'Entre em contato!'
 [author-btn-discord]: #RuanMoreiraOfc#7904 'RuanMoreiraOfc#7904'
-[author-btn-github]: https://github.com/ruanmoreiraofc 'Github Profile'
+[author-btn-github]: https://github.com/ruanmoreiraofc 'Perfil do Github'
 
 <!-- *** LANGUAGES README *** -->
 
-[lang-en]: #
-[lang-pt]: README_PORTUGUESE.md
+[lang-en]: README.md
+[lang-pt]: #
 [lang-jp]: #
 
 <!-- *** INFO CARDS *** -->
 
-[card-languages]: https://img.shields.io/github/languages/count/ruanmoreiraofc/drkz-cidade-alta?style=for-the-badge&label=Languages
-[card-last-commit]: https://img.shields.io/github/last-commit/ruanmoreiraofc/drkz-cidade-alta?style=for-the-badge&label=Last%20Commit
-[card-repo-size]: https://img.shields.io/github/repo-size/ruanmoreiraofc/drkz-cidade-alta?style=for-the-badge&label=Repo%20Size
-[card-code-size]: https://img.shields.io/github/languages/code-size/ruanmoreiraofc/drkz-cidade-alta?style=for-the-badge&label=Code%20Size
-[card-license]: https://img.shields.io/github/license/ruanmoreiraofc/drkz-cidade-alta?style=for-the-badge&label=License
+[card-languages]: https://img.shields.io/github/languages/count/ruanmoreiraofc/drkz-cidade-alta?style=for-the-badge&label=Linguagens
+[card-last-commit]: https://img.shields.io/github/last-commit/ruanmoreiraofc/drkz-cidade-alta?style=for-the-badge&label=Último%20Commit
+[card-repo-size]: https://img.shields.io/github/repo-size/ruanmoreiraofc/drkz-cidade-alta?style=for-the-badge&label=Repositório
+[card-code-size]: https://img.shields.io/github/languages/code-size/ruanmoreiraofc/drkz-cidade-alta?style=for-the-badge&label=Código
+[card-license]: https://img.shields.io/github/license/ruanmoreiraofc/drkz-cidade-alta?style=for-the-badge&label=Licença
 [card-issues]: https://img.shields.io/github/issues/ruanmoreiraofc/drkz-cidade-alta?style=for-the-badge
 
 <!-- *** MAIN BUTTONS *** -->
 
-[btn-requester]: https://github.com/cidadealta 'Company'
+[btn-requester]: https://github.com/cidadealta 'Empresa'
 [btn-git]: https://git-scm.com
 [btn-node]: https://nodejs.org
 [btn-vscode]: https://code.visualstudio.com
