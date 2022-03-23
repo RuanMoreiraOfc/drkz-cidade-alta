@@ -64,5 +64,32 @@ function createPageContainer() {
             ) => void
          >;
       })(),
+      interactAndPromise: (() => {
+         const interactions = { ...Simulate };
+
+         type PossibleElements = HTMLElement | HTMLInputElement;
+         type CustomEvent = { target: EventTarget & PossibleElements };
+
+         const delayedInteractions = Object.fromEntries(
+            Object.entries(interactions).map(([key, action]) => [
+               key,
+               async (...args: [any, any]) => {
+                  return await act(async () => {
+                     return await action(...args);
+                  });
+               },
+            ]),
+         );
+
+         return delayedInteractions as unknown as Record<
+            keyof typeof interactions,
+            (
+               element: Element | ComponentType<any>,
+               eventData?: RecursivePartial<
+                  SyntheticEvent<PossibleElements> & CustomEvent
+               >,
+            ) => void
+         >;
+      })(),
    };
 }
