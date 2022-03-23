@@ -275,8 +275,6 @@ const LabeledField = ({
    </Label>
 );
 
-<input type='' />;
-
 const CustomButton = styled(Button).attrs({
    textColor: 'var(--c-white)',
    bgColor: 'green',
