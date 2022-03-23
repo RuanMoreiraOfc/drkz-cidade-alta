@@ -1,3 +1,5 @@
+import store from '@store/index';
+
 import type {
    PropsWithChildren,
    FunctionComponent,
@@ -9,7 +11,6 @@ import { act, Simulate } from 'react-dom/test-utils';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider as ReduxProvider } from 'react-redux';
 
-import store from '@store/index';
 import { RecursivePartial } from '@~types/recursivePartial';
 
 export { createPageContainer };

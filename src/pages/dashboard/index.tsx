@@ -1,3 +1,5 @@
+import type { Store } from '@store/index';
+
 import type {
    ReactNode,
    ChangeEvent,
@@ -22,8 +24,6 @@ import sortByNumber from '@libs/sortByNumber';
 import sortByString from '@libs/sortByString';
 
 import api from '@services/api';
-
-import type { Store } from '@store/index';
 
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';

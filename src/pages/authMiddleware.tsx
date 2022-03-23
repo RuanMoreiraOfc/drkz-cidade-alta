@@ -1,8 +1,8 @@
+import type { StoreState } from '@store/index';
+
 import { Navigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
-
-import type { StoreState } from '@store/index';
 
 export default connect<Pick<Props, 'isAuthenticated'>, {}, {}, StoreState>(
    (state) => ({
