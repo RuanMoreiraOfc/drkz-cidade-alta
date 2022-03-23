@@ -5,9 +5,12 @@ import type {
    MouseEvent,
 } from 'react';
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import type { Dispatch, Action } from 'redux';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import {
+   FaDoorOpen as QuitIcon,
    FaPencilAlt as EditIcon,
    FaEye as ViewIcon,
    FaTrash as DeleteIcon,
@@ -20,7 +23,10 @@ import sortByString from '@libs/sortByString';
 
 import api from '@services/api';
 
+import type { Store } from '@store/index';
+
 import { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
 import PageSection from '@c-atoms/PageSection';
@@ -30,7 +36,10 @@ import Button from '@c-atoms/Button';
 
 import AccessibleText from '@c-molecules/AccessibleText';
 
-export default Dashboard;
+export default connect<{}, Pick<Props, 'dispatch'>, {}, {}>(
+   undefined,
+   (dispatch) => ({ dispatch: dispatch as Props['dispatch'] }),
+)(Dashboard);
 
 type ApiData = {
    id: number;
@@ -56,9 +65,12 @@ type ApiTreatedFields = Exclude<
    'id' | 'penaltyAsString' | 'penaltyLabel' | 'dateLabel'
 >;
 
-type Props = {};
+type Props = {
+   dispatch: (param: Store['action'][keyof Store['action']]) => void;
+};
 
-function Dashboard({}: Props) {
+function Dashboard({ dispatch }: Props) {
+   const navigate = useNavigate();
    const [activeField, setActiveField] = useState<
       Record<ApiTreatedFields, boolean>
    >({
@@ -167,6 +179,12 @@ function Dashboard({}: Props) {
          );
       });
    }, [orderDirection]);
+
+   function handleLogout() {
+      dispatch({ type: 'LOGOUT' });
+
+      navigate('/');
+   }
 
    function handleToggleField(field: ApiTreatedFields) {
       return _handler;
@@ -405,7 +423,12 @@ function Dashboard({}: Props) {
                   ))}
             </tbody>
          </Table>
-         <LinkButton to='./create'>Adicionar</LinkButton>
+         <ActionsBox>
+            <QuitButton onClick={handleLogout}>
+               <QuitIcon /> Sair
+            </QuitButton>
+            <LinkButton to='./create'>Adicionar</LinkButton>
+         </ActionsBox>
       </Page>
    );
 }
@@ -544,4 +567,21 @@ const TableDataActions = styled.div`
    @media (min-width: 768px) {
       display: flex;
    }
+`;
+
+const ActionsBox = styled.div`
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+`;
+
+const QuitButton = styled(Button).attrs({
+   textColor: 'var(--c-white)',
+   bgColor: 'firebrick',
+})`
+   font-size: 2.4rem;
+
+   display: flex;
+   align-items: center;
+   gap: 0.8rem;
 `;
