@@ -177,5 +177,26 @@ describe('Dashboard', () => {
       expect(tableDataContentList[1]).toMatch('20');
       expect(tableDataContentList[2]).toMatch('10');
     });
+
+    it('should display table data sorted by penalty in default order when sort state is default after being descending', async () => {
+      const { renderAndPromise, query, interactAndPromise } =
+        createPageContainer();
+
+      await renderAndPromise(Dashboard);
+      const tableHeader = query.single('th:nth-child(3)');
+      await interactAndPromise.click(tableHeader);
+      await interactAndPromise.click(tableHeader);
+      await interactAndPromise.click(tableHeader);
+      await interactAndPromise.click(tableHeader);
+
+      const tableDataList = query.many('tbody tr td:nth-child(3)');
+      expect(tableDataList).toHaveLength(3);
+      const tableDataContentList = tableDataList.map(
+        (element) => element.firstElementChild!.firstElementChild!.textContent,
+      );
+      expect(tableDataContentList[0]).toMatch('20');
+      expect(tableDataContentList[1]).toMatch('10');
+      expect(tableDataContentList[2]).toMatch('30');
+    });
   });
 });
