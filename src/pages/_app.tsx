@@ -12,8 +12,12 @@ export default MyApp;
 type Props = {};
 
 function MyApp({}: Props) {
+   const basename = import.meta.env.VITE_APP_BASE_URL;
+
    return (
-      <BrowserRouter>
+      <BrowserRouter
+         basename={typeof basename === 'boolean' ? undefined : basename}
+      >
          <Routes>
             <Route //
                path='/'
